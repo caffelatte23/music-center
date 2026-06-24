@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
-export default defineConfig(async () => ({
+export default defineConfig({
   plugins: lazyPlugins(() => [react()]),
 
   resolve: {
@@ -14,6 +14,10 @@ export default defineConfig(async () => ({
 
   staged: {
     "*.{js,ts,tsx}": "vp check --fix",
+  },
+
+  lint: {
+    plugins: ["eslint", "import", "typescript", "react"],
   },
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
@@ -37,4 +41,4 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
-}));
+});

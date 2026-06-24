@@ -1,22 +1,29 @@
 import { defineConfig } from "@pandacss/dev";
+import { tokens } from "@/theme/token";
+import { semanticTokens } from "@/theme/semantic-token";
 
 export default defineConfig({
-  // Whether to use css reset
   preflight: true,
 
-  // Where to look for your css declarations
-  include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
+  globalCss: {
+    html: {
+      height: "100vh",
+    },
+    "#root": {
+      height: "100%",
+    },
+  },
 
-  // Files to exclude
+  include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
   exclude: [],
 
-  // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      tokens,
+      semanticTokens,
+    },
   },
 
   jsxFramework: "react",
-
-  // The output directory for your css system
   outdir: "styled-system",
 });
