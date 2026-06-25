@@ -11,6 +11,8 @@ export default defineConfig({
     },
     "#root": {
       height: "100%",
+      fontFamily: "Notosans JP",
+      fontSize: "13px",
     },
   },
 
