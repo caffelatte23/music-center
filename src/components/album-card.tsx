@@ -1,23 +1,41 @@
+import { Album } from "@/features/library/models/album";
 import { css } from "@/styled-system/css";
 
-export const AlbumCard = () => {
+export const AlbumCard = ({ value }: { value: Album }) => {
   return (
-    <article>
+    <article
+      className={css({
+        transition: "opacity 0.12s",
+        cursor: "pointer",
+        opacity: { base: 1, _hover: 0.8 },
+      })}
+    >
       <div
         className={css({
-          boxSize: "160px",
+          aspectRatio: "1/1",
           bg: "album.navy",
           rounded: "md",
-          display: "block",
+          display: "grid",
+          placeItems: "center",
         })}
-      />
+      >
+        <span
+          className={css({
+            fontWeight: "bold",
+            color: "white/35",
+            fontSize: "4xl",
+          })}
+        >
+          {value.title.charAt(0)}
+        </span>
+      </div>
       <footer className={css({ mt: "2" })}>
-        <h3 className={css({ fontWeight: "medium" })}>Neon Geometry</h3>
+        <h3 className={css({ fontWeight: "medium" })}>{value.title}</h3>
         <p className={css({ fontSize: "xs", color: "text-subtle", fontWeight: "medium" })}>
-          Ultrawave
+          {value.author}
         </p>
         <p className={css({ fontSize: "xs", color: "text-subtle", fontWeight: "medium" })}>
-          <time dateTime="2024">2024</time>
+          {value.releaseYear}
         </p>
       </footer>
     </article>

@@ -1,12 +1,18 @@
-import { defineConfig, lazyPlugins } from "vite-plus";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig, lazyPlugins } from "vite-plus";
 
-// @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: lazyPlugins(() => [react()]),
+  plugins: lazyPlugins(() => [
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+    }),
+    react(),
+  ]),
 
   resolve: {
     tsconfigPaths: true,
@@ -18,6 +24,25 @@ export default defineConfig({
 
   lint: {
     plugins: ["eslint", "import", "typescript", "react"],
+    categories: {
+      correctness: "error",
+    },
+    ignorePatterns: ["**/src-tauri/**"],
+  },
+
+  fmt: {
+    sortImports: {
+      groups: [
+        "value-builtin",
+        "value-external",
+        "value-internal",
+        ["value-parent", "value-sibling", "value-index"],
+        { newlinesBetween: true },
+        "type-import",
+      ],
+      newlinesBetween: true,
+    },
+    ignorePatterns: ["**/src-tauri/**"],
   },
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`

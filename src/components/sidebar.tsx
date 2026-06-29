@@ -1,5 +1,3 @@
-import { css } from "@/styled-system/css";
-import { Divider, styled } from "@/styled-system/jsx";
 import {
   IconAppLogo,
   IconChevronLeft,
@@ -9,6 +7,8 @@ import {
   IconPlaylist,
   IconSettings,
 } from "@/components/icons";
+import { css } from "@/styled-system/css";
+import { Divider, styled } from "@/styled-system/jsx";
 
 export const Sidebar = () => {
   return (

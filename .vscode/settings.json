@@ -1,7 +1,18 @@
 {
   "[javascript][typescript][javascriptreact][typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "editor.formatOnSave": true,
-  "claudeCode.useTerminal": true
+  "claudeCode.useTerminal": true,
+
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true,
+    "node_modules/**": true
+  }
 }

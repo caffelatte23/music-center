@@ -1,7 +1,14 @@
 import { AlbumCard } from "@/components/album-card";
+import { IconGridView, IconListView, IconSearch } from "@/components/icons";
+import { Album } from "@/features/library/models/album";
 import { css } from "@/styled-system/css";
 import { Flex, Grid, styled } from "@/styled-system/jsx";
-import { IconGridView, IconListView, IconSearch } from "@/components/icons";
+
+const mockAlbum: Album = {
+  title: "Neon Geometry",
+  author: "Ultrawave",
+  releaseYear: 2024,
+};
 
 export const LibraryPage = () => {
   return (
@@ -53,10 +60,10 @@ export const LibraryPage = () => {
               />
             </Flex>
             <ButtonGroup>
-              <ButtonGroupItem type="button">
+              <ButtonGroupItem type="button" data-current>
                 <IconGridView />
               </ButtonGroupItem>
-              <ButtonGroupItem type="button" data-current>
+              <ButtonGroupItem type="button">
                 <IconListView />
               </ButtonGroupItem>
             </ButtonGroup>
@@ -77,12 +84,11 @@ export const LibraryPage = () => {
         })}
       >
         <Grid gridTemplateColumns="repeat(auto-fill, minmax(160px, 1fr))" gap="5">
-          <AlbumCard />
-          <AlbumCard />
-          <AlbumCard />
-          <AlbumCard />
-          <AlbumCard />
-          <AlbumCard />
+          {Array(20)
+            .fill(0)
+            .map((_, idx) => (
+              <AlbumCard value={mockAlbum} key={idx} />
+            ))}
         </Grid>
       </main>
     </section>

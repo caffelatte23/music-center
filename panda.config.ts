@@ -1,6 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
-import { tokens } from "@/theme/token";
+
 import { semanticTokens } from "@/theme/semantic-token";
+import { tokens } from "@/theme/token";
 
 export default defineConfig({
   preflight: true,
