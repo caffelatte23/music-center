@@ -1,6 +1,7 @@
-import { tanstackRouter } from "@tanstack/router-plugin/vite";
-import react from "@vitejs/plugin-react";
-import { defineConfig, lazyPlugins } from "vite-plus";
+import { defineFmtConfig, defineLintConfig } from '@caffelatte23/oxc-config';
+import { tanstackRouter } from '@tanstack/router-plugin/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig, lazyPlugins } from 'vite-plus';
 
 const host = process.env.TAURI_DEV_HOST;
 
@@ -8,7 +9,7 @@ const host = process.env.TAURI_DEV_HOST;
 export default defineConfig({
   plugins: lazyPlugins(() => [
     tanstackRouter({
-      target: "react",
+      target: 'react',
       autoCodeSplitting: true,
     }),
     react(),
@@ -19,31 +20,20 @@ export default defineConfig({
   },
 
   staged: {
-    "*.{js,ts,tsx}": "vp check --fix",
+    '*.{js,ts,tsx}': 'vp check --fix',
   },
 
-  lint: {
-    plugins: ["eslint", "import", "typescript", "react"],
+  lint: defineLintConfig({
+    plugins: ['react'],
     categories: {
-      correctness: "error",
+      correctness: 'error',
     },
-    ignorePatterns: ["**/src-tauri/**"],
-  },
+    ignorePatterns: ['**/src-tauri/**'],
+  }),
 
-  fmt: {
-    sortImports: {
-      groups: [
-        "value-builtin",
-        "value-external",
-        "value-internal",
-        ["value-parent", "value-sibling", "value-index"],
-        { newlinesBetween: true },
-        "type-import",
-      ],
-      newlinesBetween: true,
-    },
-    ignorePatterns: ["**/src-tauri/**"],
-  },
+  fmt: defineFmtConfig({
+    ignorePatterns: ['**/src-tauri/**'],
+  }),
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -56,14 +46,14 @@ export default defineConfig({
     host: host || false,
     hmr: host
       ? {
-          protocol: "ws",
+          protocol: 'ws',
           host,
           port: 1421,
         }
       : undefined,
     watch: {
       // 3. tell Vite to ignore watching `src-tauri`
-      ignored: ["**/src-tauri/**"],
+      ignored: ['**/src-tauri/**'],
     },
   },
 });

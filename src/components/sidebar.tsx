@@ -6,47 +6,47 @@ import {
   IconNowPlaying,
   IconPlaylist,
   IconSettings,
-} from "@/components/icons";
-import { css } from "@/styled-system/css";
-import { Divider, styled } from "@/styled-system/jsx";
+} from '@/components/icons';
+import { css } from '@/styled-system/css';
+import { Divider, styled } from '@/styled-system/jsx';
 
 export const Sidebar = () => {
   return (
     <aside
       className={css({
-        w: "240px",
-        borderRight: "1px solid token(colors.border)",
-        display: "flex",
-        flexDir: "column",
-        bg: "sidebar",
+        w: '240px',
+        borderRight: '1px solid token(colors.border)',
+        display: 'flex',
+        flexDir: 'column',
+        bg: 'sidebar',
       })}
     >
       <h1
         className={css({
           py: 4,
           px: 6,
-          fontWeight: "bold",
-          display: "flex",
-          alignItems: "center",
-          gap: "2",
+          fontWeight: 'bold',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '2',
         })}
       >
         <div
           className={css({
             w: 6,
             h: 6,
-            display: "grid",
-            placeItems: "center",
-            bg: "accent",
-            borderRadius: "md",
+            display: 'grid',
+            placeItems: 'center',
+            bg: 'accent',
+            borderRadius: 'md',
           })}
         >
           <IconAppLogo size={12} />
         </div>
         Music Center
       </h1>
-      <Divider color={"border"} />
-      <nav className={css({ height: "full", p: 2 })}>
+      <Divider color={'border'} />
+      <nav className={css({ height: 'full', p: 2 })}>
         <ul>
           <ListItem data-current>
             <IconGrid />
@@ -62,7 +62,7 @@ export const Sidebar = () => {
           </ListItem>
         </ul>
       </nav>
-      <Divider color={"border"} />
+      <Divider color={'border'} />
       <div className={css({ p: 2 })}>
         <ul>
           <ListItem>
@@ -83,20 +83,20 @@ export const Sidebar = () => {
   );
 };
 
-const ListItem = styled("li", {
+const ListItem = styled('li', {
   base: {
     px: 4,
     py: 2,
-    cursor: "pointer",
-    rounded: "md",
-    display: "flex",
-    gap: "2",
-    alignItems: "center",
-    color: "text-medium",
+    cursor: 'pointer',
+    rounded: 'md',
+    display: 'flex',
+    gap: '2',
+    alignItems: 'center',
+    color: 'text-medium',
     _current: {
-      bg: "accent/10",
-      color: "accent",
-      fontWeight: "medium",
+      bg: 'accent/10',
+      color: 'accent',
+      fontWeight: 'medium',
     },
   },
 });
