@@ -1,8 +1,10 @@
+import { Link } from '@tanstack/react-router';
+
+import { ColorModeSwitcher } from '@/components/color-mode';
 import {
   IconAppLogo,
   IconChevronLeft,
   IconGrid,
-  IconMoon,
   IconNowPlaying,
   IconPlaylist,
   IconSettings,
@@ -48,17 +50,27 @@ export const Sidebar = () => {
       <Divider color={'border'} />
       <nav className={css({ height: 'full', p: 2 })}>
         <ul>
-          <ListItem data-current>
-            <IconGrid />
-            ライブラリ
+          <ListItem>
+            <Link to='/' className={inlineListStyle}>
+              <IconGrid />
+              ライブラリ
+            </Link>
           </ListItem>
           <ListItem>
-            <IconNowPlaying />
-            再生中
+            <Link
+              to='/$albumId'
+              params={{ albumId: '1' }}
+              className={inlineListStyle}
+            >
+              <IconNowPlaying />
+              再生中
+            </Link>
           </ListItem>
           <ListItem>
-            <IconPlaylist />
-            プレイリスト
+            <Link to='/' className={inlineListStyle}>
+              <IconPlaylist />
+              プレイリスト
+            </Link>
           </ListItem>
         </ul>
       </nav>
@@ -70,8 +82,7 @@ export const Sidebar = () => {
             設定
           </ListItem>
           <ListItem>
-            <IconMoon />
-            ダークモード
+            <ColorModeSwitcher className={inlineListStyle} />
           </ListItem>
           <ListItem>
             <IconChevronLeft />
@@ -93,10 +104,17 @@ const ListItem = styled('li', {
     gap: '2',
     alignItems: 'center',
     color: 'text-medium',
-    _current: {
-      bg: 'accent/10',
+    '&:has(a[aria-current=page])': {
+      bgColor: 'accent/10',
       color: 'accent',
       fontWeight: 'medium',
     },
   },
+});
+
+const inlineListStyle = css({
+  display: 'flex',
+  gap: '2',
+  alignItems: 'center',
+  cursor: 'pointer',
 });

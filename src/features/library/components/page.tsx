@@ -1,3 +1,5 @@
+import { Link } from '@tanstack/react-router';
+
 import { AlbumCard } from '@/components/album-card';
 import { IconGridView, IconListView, IconSearch } from '@/components/icons';
 import { Album } from '@/features/library/models/album';
@@ -94,7 +96,13 @@ export const LibraryPage = () => {
           {Array(20)
             .fill(0)
             .map((_, idx) => (
-              <AlbumCard value={mockAlbum} key={idx} />
+              <Link
+                key={idx}
+                to='/$albumId'
+                params={{ albumId: idx.toFixed() }}
+              >
+                <AlbumCard value={mockAlbum} />
+              </Link>
             ))}
         </Grid>
       </main>

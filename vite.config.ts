@@ -28,11 +28,11 @@ export default defineConfig({
     categories: {
       correctness: 'error',
     },
-    ignorePatterns: ['**/src-tauri/**'],
+    ignorePatterns: ['**/src-tauri/**', 'src/routeTree.gen.ts'],
   }),
 
   fmt: defineFmtConfig({
-    ignorePatterns: ['**/src-tauri/**'],
+    ignorePatterns: ['**/src-tauri/**', 'src/routeTree.gen.ts'],
   }),
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
