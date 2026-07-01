@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { useState } from 'react';
 
 import { ColorModeSwitcher } from '@/components/color-mode';
 import {
@@ -9,24 +10,34 @@ import {
   IconPlaylist,
   IconSettings,
 } from '@/components/icons';
-import { css } from '@/styled-system/css';
+import { Label } from '@/components/label';
+import { css, cx } from '@/styled-system/css';
 import { Divider, styled } from '@/styled-system/jsx';
 
 export const Sidebar = () => {
+  const [isExpand, setIsExpand] = useState<boolean>(true);
+
   return (
     <aside
-      className={css({
-        w: '240px',
-        borderRight: '1px solid token(colors.border)',
-        display: 'flex',
-        flexDir: 'column',
-        bg: 'sidebar',
-      })}
+      className={cx(
+        css({
+          w: '240px',
+          borderRight: '1px solid token(colors.border)',
+          display: 'flex',
+          flexDir: 'column',
+          bg: 'sidebar',
+          transition: 'width 0.2s ease',
+          overflow: 'hidden',
+        }),
+        'group',
+      )}
+      style={{ width: isExpand ? '240px' : '64px' }}
+      aria-expanded={isExpand}
     >
       <h1
         className={css({
           py: 4,
-          px: 6,
+          px: 4,
           fontWeight: 'bold',
           display: 'flex',
           alignItems: 'center',
@@ -35,6 +46,7 @@ export const Sidebar = () => {
       >
         <div
           className={css({
+            flexShrink: 0,
             w: 6,
             h: 6,
             display: 'grid',
@@ -45,7 +57,7 @@ export const Sidebar = () => {
         >
           <IconAppLogo size={12} />
         </div>
-        Music Center
+        <Label>Music Center</Label>
       </h1>
       <Divider color={'border'} />
       <nav className={css({ height: 'full', p: 2 })}>
@@ -53,7 +65,7 @@ export const Sidebar = () => {
           <ListItem>
             <Link to='/' className={inlineListStyle}>
               <IconGrid />
-              ライブラリ
+              <Label>ライブラリ</Label>
             </Link>
           </ListItem>
           <ListItem>
@@ -63,13 +75,13 @@ export const Sidebar = () => {
               className={inlineListStyle}
             >
               <IconNowPlaying />
-              再生中
+              <Label>再生中</Label>
             </Link>
           </ListItem>
           <ListItem>
-            <Link to='/' className={inlineListStyle}>
+            <Link to='/playlist' className={inlineListStyle}>
               <IconPlaylist />
-              プレイリスト
+              <Label>プレイリスト</Label>
             </Link>
           </ListItem>
         </ul>
@@ -79,14 +91,28 @@ export const Sidebar = () => {
         <ul>
           <ListItem>
             <IconSettings />
-            設定
+            <Label>設定</Label>
           </ListItem>
           <ListItem>
             <ColorModeSwitcher className={inlineListStyle} />
           </ListItem>
           <ListItem>
-            <IconChevronLeft />
-            折りたたむ
+            <button
+              type='button'
+              className={inlineListStyle}
+              onClick={() => setIsExpand((prev) => !prev)}
+            >
+              <div
+                className={css({
+                  flexShrink: 0,
+                  transition: 'transform 0.2s ease',
+                  transform: isExpand ? 'rotate(0deg)' : 'rotate(180deg)',
+                })}
+              >
+                <IconChevronLeft />
+              </div>
+              <Label>折りたたむ</Label>
+            </button>
           </ListItem>
         </ul>
       </div>
@@ -104,6 +130,7 @@ const ListItem = styled('li', {
     gap: '2',
     alignItems: 'center',
     color: 'text-medium',
+    '& svg': { flexShrink: 0 },
     '&:has(a[aria-current=page])': {
       bgColor: 'accent/10',
       color: 'accent',
@@ -117,4 +144,5 @@ const inlineListStyle = css({
   gap: '2',
   alignItems: 'center',
   cursor: 'pointer',
+  w: 'full',
 });

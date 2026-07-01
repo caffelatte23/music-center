@@ -9,91 +9,115 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AlbumRouteImport } from './routes/_album'
-import { Route as AlbumIndexRouteImport } from './routes/_album/index'
-import { Route as AlbumAlbumIdRouteImport } from './routes/_album/$albumId'
+import { Route as LayoutRouteImport } from './routes/_layout'
+import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutPlaylistRouteImport } from './routes/_layout/playlist'
+import { Route as LayoutAlbumIdRouteImport } from './routes/_layout/$albumId'
 
-const AlbumRoute = AlbumRouteImport.update({
-  id: '/_album',
+const LayoutRoute = LayoutRouteImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AlbumIndexRoute = AlbumIndexRouteImport.update({
+const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AlbumRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
-const AlbumAlbumIdRoute = AlbumAlbumIdRouteImport.update({
+const LayoutPlaylistRoute = LayoutPlaylistRouteImport.update({
+  id: '/playlist',
+  path: '/playlist',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutAlbumIdRoute = LayoutAlbumIdRouteImport.update({
   id: '/$albumId',
   path: '/$albumId',
-  getParentRoute: () => AlbumRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AlbumIndexRoute
-  '/$albumId': typeof AlbumAlbumIdRoute
+  '/': typeof LayoutIndexRoute
+  '/$albumId': typeof LayoutAlbumIdRoute
+  '/playlist': typeof LayoutPlaylistRoute
 }
 export interface FileRoutesByTo {
-  '/$albumId': typeof AlbumAlbumIdRoute
-  '/': typeof AlbumIndexRoute
+  '/$albumId': typeof LayoutAlbumIdRoute
+  '/playlist': typeof LayoutPlaylistRoute
+  '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_album': typeof AlbumRouteWithChildren
-  '/_album/$albumId': typeof AlbumAlbumIdRoute
-  '/_album/': typeof AlbumIndexRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/$albumId': typeof LayoutAlbumIdRoute
+  '/_layout/playlist': typeof LayoutPlaylistRoute
+  '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$albumId'
+  fullPaths: '/' | '/$albumId' | '/playlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$albumId' | '/'
-  id: '__root__' | '/_album' | '/_album/$albumId' | '/_album/'
+  to: '/$albumId' | '/playlist' | '/'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/_layout/$albumId'
+    | '/_layout/playlist'
+    | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  AlbumRoute: typeof AlbumRouteWithChildren
+  LayoutRoute: typeof LayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_album': {
-      id: '/_album'
+    '/_layout': {
+      id: '/_layout'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof AlbumRouteImport
+      preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_album/': {
-      id: '/_album/'
+    '/_layout/': {
+      id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AlbumIndexRouteImport
-      parentRoute: typeof AlbumRoute
+      preLoaderRoute: typeof LayoutIndexRouteImport
+      parentRoute: typeof LayoutRoute
     }
-    '/_album/$albumId': {
-      id: '/_album/$albumId'
+    '/_layout/playlist': {
+      id: '/_layout/playlist'
+      path: '/playlist'
+      fullPath: '/playlist'
+      preLoaderRoute: typeof LayoutPlaylistRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/$albumId': {
+      id: '/_layout/$albumId'
       path: '/$albumId'
       fullPath: '/$albumId'
-      preLoaderRoute: typeof AlbumAlbumIdRouteImport
-      parentRoute: typeof AlbumRoute
+      preLoaderRoute: typeof LayoutAlbumIdRouteImport
+      parentRoute: typeof LayoutRoute
     }
   }
 }
 
-interface AlbumRouteChildren {
-  AlbumAlbumIdRoute: typeof AlbumAlbumIdRoute
-  AlbumIndexRoute: typeof AlbumIndexRoute
+interface LayoutRouteChildren {
+  LayoutAlbumIdRoute: typeof LayoutAlbumIdRoute
+  LayoutPlaylistRoute: typeof LayoutPlaylistRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
-const AlbumRouteChildren: AlbumRouteChildren = {
-  AlbumAlbumIdRoute: AlbumAlbumIdRoute,
-  AlbumIndexRoute: AlbumIndexRoute,
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAlbumIdRoute: LayoutAlbumIdRoute,
+  LayoutPlaylistRoute: LayoutPlaylistRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
 }
 
-const AlbumRouteWithChildren = AlbumRoute._addFileChildren(AlbumRouteChildren)
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  AlbumRoute: AlbumRouteWithChildren,
+  LayoutRoute: LayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -3,7 +3,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { Sidebar } from '@/components/sidebar';
 import { css } from '@/styled-system/css';
 
-export const Route = createFileRoute('/_album')({
+export const Route = createFileRoute('/_layout')({
   component: RouteComponent,
 });
 

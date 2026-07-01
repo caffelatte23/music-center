@@ -2,6 +2,7 @@ import { useTheme } from 'next-themes';
 import { HTMLProps } from 'react';
 
 import { IconMoon, IconSun } from '@/components/icons';
+import { Label } from '@/components/label';
 
 export type ColorMode = 'light' | 'dark';
 
@@ -17,12 +18,12 @@ export const ColorModeSwitcher = (props: HTMLProps<HTMLButtonElement>) => {
       {theme.theme === 'dark' ? (
         <>
           <IconSun />
-          ライトモード
+          <Label>ライトモード</Label>
         </>
       ) : (
         <>
           <IconMoon />
-          ダークモード
+          <Label>ダークモード</Label>
         </>
       )}
     </button>

@@ -2,7 +2,6 @@
   "[javascript][typescript][javascriptreact][typescriptreact]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "editor.formatOnSave": true,
   "claudeCode.useTerminal": true,
 
   "files.readonlyInclude": {
@@ -14,5 +13,12 @@
   "search.exclude": {
     "**/routeTree.gen.ts": true,
     "node_modules/**": true
-  }
+  },
+  "oxc.fmt.configPath": "./vite.config.ts",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
+  "npm.scriptRunner": "vp"
 }
