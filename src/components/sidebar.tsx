@@ -21,13 +21,13 @@ export const Sidebar = () => {
     <aside
       className={cx(
         css({
-          w: '240px',
           borderRight: '1px solid token(colors.border)',
           display: 'flex',
           flexDir: 'column',
           bg: 'sidebar',
           transition: 'width 0.2s ease',
           overflow: 'hidden',
+          flexShrink: 0,
         }),
         'group',
       )}
@@ -144,5 +144,4 @@ const inlineListStyle = css({
   gap: '2',
   alignItems: 'center',
   cursor: 'pointer',
-  w: 'full',
 });
