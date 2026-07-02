@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
 import { Route as LayoutPlaylistRouteImport } from './routes/_layout/playlist'
 import { Route as LayoutAlbumIdRouteImport } from './routes/_layout/$albumId'
 
@@ -21,6 +22,11 @@ const LayoutRoute = LayoutRouteImport.update({
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutPlaylistRoute = LayoutPlaylistRouteImport.update({
@@ -38,10 +44,12 @@ export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/$albumId': typeof LayoutAlbumIdRoute
   '/playlist': typeof LayoutPlaylistRoute
+  '/settings': typeof LayoutSettingsRoute
 }
 export interface FileRoutesByTo {
   '/$albumId': typeof LayoutAlbumIdRoute
   '/playlist': typeof LayoutPlaylistRoute
+  '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
@@ -49,18 +57,20 @@ export interface FileRoutesById {
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/$albumId': typeof LayoutAlbumIdRoute
   '/_layout/playlist': typeof LayoutPlaylistRoute
+  '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$albumId' | '/playlist'
+  fullPaths: '/' | '/$albumId' | '/playlist' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$albumId' | '/playlist' | '/'
+  to: '/$albumId' | '/playlist' | '/settings' | '/'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/$albumId'
     | '/_layout/playlist'
+    | '/_layout/settings'
     | '/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -84,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/settings': {
+      id: '/_layout/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof LayoutSettingsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/playlist': {
       id: '/_layout/playlist'
       path: '/playlist'
@@ -104,12 +121,14 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutAlbumIdRoute: typeof LayoutAlbumIdRoute
   LayoutPlaylistRoute: typeof LayoutPlaylistRoute
+  LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutAlbumIdRoute: LayoutAlbumIdRoute,
   LayoutPlaylistRoute: LayoutPlaylistRoute,
+  LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 

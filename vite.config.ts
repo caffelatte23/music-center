@@ -6,7 +6,7 @@ import { defineConfig, lazyPlugins } from 'vite-plus';
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(() => ({
   plugins: lazyPlugins(() => [
     tanstackRouter({
       target: 'react',
@@ -56,4 +56,4 @@ export default defineConfig({
       ignored: ['**/src-tauri/**'],
     },
   },
-});
+}));

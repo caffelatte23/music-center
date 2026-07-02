@@ -90,8 +90,10 @@ export const Sidebar = () => {
       <div className={css({ p: 2 })}>
         <ul>
           <ListItem>
-            <IconSettings />
-            <Label>設定</Label>
+            <Link to='/settings' className={inlineListStyle}>
+              <IconSettings />
+              <Label>設定</Label>
+            </Link>
           </ListItem>
           <ListItem>
             <ColorModeSwitcher className={inlineListStyle} />
