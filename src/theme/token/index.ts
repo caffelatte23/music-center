@@ -3,6 +3,7 @@ import { defineTokens } from '@pandacss/dev';
 import { colors } from './colors';
 import { durations } from './durations';
 import { easings } from './easings';
+import { fontSizes } from './font-size';
 import { letterSpacings } from './letter-spacings';
 import { radii } from './radii';
 import { shadows } from './shadows';
@@ -16,4 +17,5 @@ export const tokens = defineTokens({
   radii,
   shadows,
   spacing,
+  fontSizes,
 });

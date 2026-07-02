@@ -10,6 +10,9 @@ export default defineConfig({
     html: {
       height: '100vh',
     },
+    body: {
+      height: '100%',
+    },
     '#root': {
       height: '100%',
       fontFamily: 'Notosans JP',

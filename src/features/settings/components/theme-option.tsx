@@ -55,7 +55,7 @@ const ThemeOptionRoot = styled('label', {
     rounded: 'md',
     overflow: 'hidden',
     cursor: 'pointer',
-    border: '1px solid token(colors.border)',
+    border: 'default',
     _selected: {
       borderColor: 'accent',
       boxShadow: '0 0 0 1px token(colors.accent)',
@@ -133,7 +133,7 @@ const LabelBar = styled('div', {
     px: 3,
     py: 2,
     bg: 'surface',
-    borderTop: '1px solid token(colors.border)',
+    borderTop: 'default',
     _selected: {
       bg: 'accent-dim',
     },

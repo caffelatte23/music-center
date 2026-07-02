@@ -21,7 +21,7 @@ export const Sidebar = () => {
     <aside
       className={cx(
         css({
-          borderRight: '1px solid token(colors.border)',
+          borderRight: 'default',
           display: 'flex',
           flexDir: 'column',
           bg: 'sidebar',

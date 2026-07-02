@@ -22,7 +22,7 @@ export const AlbumPage = () => {
         className={css({
           display: 'flex',
           flexDir: 'column',
-          borderBottom: '1px solid token(colors.border)',
+          borderBottom: 'default',
           px: 8,
         })}
       >

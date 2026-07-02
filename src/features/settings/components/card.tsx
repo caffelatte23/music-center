@@ -10,7 +10,7 @@ const CardRoot = styled('div', {
 
 const CardHeader = styled('div', {
   base: {
-    borderBottom: '1px solid token(colors.border)',
+    borderBottom: 'default',
     px: 5,
     py: 3,
     color: 'text-subtle',

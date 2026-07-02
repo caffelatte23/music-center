@@ -1,12 +1,14 @@
-import { defineFmtConfig, defineLintConfig } from '@caffelatte23/oxc-config';
+import { defineLintConfig } from '@caffelatte23/oxc-config';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, lazyPlugins } from 'vite-plus';
 
+import fmtConfig from './oxfmt.config';
+
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
-export default defineConfig(() => ({
+export default defineConfig({
   plugins: lazyPlugins(() => [
     tanstackRouter({
       target: 'react',
@@ -31,9 +33,7 @@ export default defineConfig(() => ({
     ignorePatterns: ['**/src-tauri/**', 'src/routeTree.gen.ts'],
   }),
 
-  fmt: defineFmtConfig({
-    ignorePatterns: ['**/src-tauri/**', 'src/routeTree.gen.ts'],
-  }),
+  fmt: fmtConfig,
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -56,4 +56,4 @@ export default defineConfig(() => ({
       ignored: ['**/src-tauri/**'],
     },
   },
-}));
+});
