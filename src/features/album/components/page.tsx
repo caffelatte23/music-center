@@ -1,4 +1,5 @@
-import { IconEdit, IconPause } from '@/components/icons';
+import { Button, PlayButton } from '@/components/button';
+import { IconEdit } from '@/components/icons';
 import { Album } from '@/features/library/models/album';
 import { css } from '@/styled-system/css';
 import { Flex, styled } from '@/styled-system/jsx';
@@ -80,32 +81,10 @@ export const AlbumPage = () => {
               </div>
 
               <Flex gap={3}>
-                <button
+                <PlayButton />
+                <Button
                   type='button'
                   className={css({
-                    px: 4,
-                    py: 2,
-                    border: '1px solid',
-                    borderColor: 'border',
-                    rounded: 'md',
-                    bgColor: 'accent',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,
-                  })}
-                >
-                  <IconPause />
-                  一時停止
-                </button>
-                <button
-                  type='button'
-                  className={css({
-                    px: 4,
-                    py: 2,
-                    border: '1px solid',
-                    borderColor: 'border',
-                    rounded: 'md',
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
@@ -113,7 +92,7 @@ export const AlbumPage = () => {
                 >
                   <IconEdit />
                   情報を編集
-                </button>
+                </Button>
               </Flex>
             </Flex>
           </Flex>

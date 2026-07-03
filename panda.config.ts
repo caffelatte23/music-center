@@ -1,6 +1,7 @@
 import { defineConfig } from '@pandacss/dev';
 
 import { semanticTokens } from '@/theme/semantic-token';
+import { textStyles } from '@/theme/text-style';
 import { tokens } from '@/theme/token';
 
 export default defineConfig({
@@ -15,8 +16,9 @@ export default defineConfig({
     },
     '#root': {
       height: '100%',
-      fontFamily: 'Notosans JP',
+      fontFamily: 'Noto Sans JP',
       fontSize: '13px',
+      isolation: 'isolate',
     },
   },
 
@@ -27,6 +29,7 @@ export default defineConfig({
     extend: {
       tokens,
       semanticTokens,
+      textStyles,
     },
   },
 

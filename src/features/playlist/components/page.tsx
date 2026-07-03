@@ -1,5 +1,5 @@
+import { PlayButton } from '@/components/button';
 import { IconPlaylist, IconPlus } from '@/components/icons';
-import { IconPause } from '@/components/icons';
 import { Album } from '@/features/library/models/album';
 import { css } from '@/styled-system/css';
 import { Flex, styled } from '@/styled-system/jsx';
@@ -70,24 +70,7 @@ const PlaylistDetail = () => {
               </p>
             </div>
           </Flex>
-          <button
-            type='button'
-            className={css({
-              px: 4,
-              py: 2,
-              border: '1px solid',
-              borderColor: 'border',
-              rounded: 'md',
-              bgColor: 'accent',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 2,
-            })}
-          >
-            <IconPause />
-            一時停止
-          </button>
+          <PlayButton />
         </div>
       </header>
       <main

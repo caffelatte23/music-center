@@ -146,4 +146,5 @@ const inlineListStyle = css({
   gap: '2',
   alignItems: 'center',
   cursor: 'pointer',
+  w: 'full',
 });

@@ -1,3 +1,4 @@
+import { Tabs } from '@base-ui/react/tabs';
 import { Link } from '@tanstack/react-router';
 
 import { AlbumCard } from '@/components/album-card';
@@ -46,6 +47,14 @@ export const LibraryPage = () => {
             </p>
           </div>
           <Flex gap={4}>
+            <ButtonGroup>
+              <ButtonGroupItem type='button' data-current>
+                <IconGridView />
+              </ButtonGroupItem>
+              <ButtonGroupItem type='button'>
+                <IconListView />
+              </ButtonGroupItem>
+            </ButtonGroup>
             <Flex
               align={'center'}
               gap={2}
@@ -65,21 +74,17 @@ export const LibraryPage = () => {
                 placeholder='検索...'
               />
             </Flex>
-            <ButtonGroup>
-              <ButtonGroupItem type='button' data-current>
-                <IconGridView />
-              </ButtonGroupItem>
-              <ButtonGroupItem type='button'>
-                <IconListView />
-              </ButtonGroupItem>
-            </ButtonGroup>
           </Flex>
         </div>
         <nav>
-          <ul className={css({ display: 'flex' })}>
-            <TabItem data-current>アルバム</TabItem>
-            <TabItem>曲</TabItem>
-          </ul>
+          <Tabs.Root defaultValue={'album'}>
+            <Tabs.List className={css({ pos: 'relative' })}>
+              <TabItem value={'album'}>アルバム</TabItem>
+              <TabItem value={'track'}>曲</TabItem>
+              <Indicator />
+            </Tabs.List>
+          </Tabs.Root>
+          <ul className={css({ display: 'flex' })}></ul>
         </nav>
       </header>
       <main
@@ -110,18 +115,33 @@ export const LibraryPage = () => {
   );
 };
 
-const TabItem = styled('li', {
+const TabItem = styled(Tabs.Tab, {
   base: {
     color: 'text-medium',
     px: 4,
     py: 2,
     cursor: 'pointer',
-    _current: {
-      borderBottom: '2px solid',
-      borderColor: 'accent',
+    _active: {
       color: 'accent',
       fontWeight: 'medium',
     },
+  },
+});
+
+const Indicator = styled(Tabs.Indicator, {
+  base: {
+    borderBottom: '2px solid',
+    borderColor: 'accent',
+    boxSizing: 'border-box',
+    position: 'absolute',
+    zIndex: '-1',
+    left: '0',
+    bottom: '0',
+    translate: 'var(--active-tab-left)',
+    width: ' var(--active-tab-width)',
+    transitionProperty: 'translate, width',
+    transitionDuration: '150ms',
+    transitionTimingFunction: 'ease-in-out',
   },
 });
 
