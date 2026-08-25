@@ -1,19 +1,13 @@
 import { Tabs } from '@base-ui/react/tabs';
-import { Link } from '@tanstack/react-router';
+import { Link, useLoaderData } from '@tanstack/react-router';
 
 import { AlbumCard } from '@/components/album-card';
 import { IconGridView, IconListView, IconSearch } from '@/components/icons';
-import { Album } from '@/features/library/models/album';
 import { css } from '@/styled-system/css';
 import { Flex, Grid, styled } from '@/styled-system/jsx';
 
-const mockAlbum: Album = {
-  title: 'Neon Geometry',
-  author: 'Ultrawave',
-  releaseYear: 2024,
-};
-
 export const LibraryPage = () => {
+  const albums = useLoaderData({ from: '/_layout/' });
   return (
     <section
       className={css({
@@ -43,7 +37,7 @@ export const LibraryPage = () => {
               ライブラリ
             </h2>
             <p className={css({ fontSize: 'xs', color: 'text-subtle' })}>
-              12アルバム・20曲
+              {albums.length}アルバム・20曲
             </p>
           </div>
           <Flex gap={4}>
@@ -98,17 +92,15 @@ export const LibraryPage = () => {
           gridTemplateColumns='repeat(auto-fill, minmax(160px, 1fr))'
           gap='5'
         >
-          {Array(20)
-            .fill(0)
-            .map((_, idx) => (
-              <Link
-                key={idx}
-                to='/$albumId'
-                params={{ albumId: idx.toFixed() }}
-              >
-                <AlbumCard value={mockAlbum} />
-              </Link>
-            ))}
+          {albums.map((d) => (
+            <Link
+              key={d.id}
+              to='/$albumId'
+              params={{ albumId: d.id.toFixed() }}
+            >
+              <AlbumCard value={d} />
+            </Link>
+          ))}
         </Grid>
       </main>
     </section>
